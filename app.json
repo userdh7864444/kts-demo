@@ -27,6 +27,18 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4a6d09d0-a23d-471c-a3ea-69a7e14c77a2"
+      }
+    },
+    "owner": "itzansari178",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/4a6d09d0-a23d-471c-a3ea-69a7e14c77a2"
     }
   }
 }
