@@ -51,7 +51,7 @@ const HomeScreen = () => {
             style={styles.card}
             onPress={() => {
               if (item.url) {
-                Linking.openURL(item.url);
+                navigation.navigate("WebViewScreen", { url: item.url }); // Navigate to WebView screen
               } else {
                 // Navigate to respective screen if URL is missing
                 if (item.title === "One Click print") {
