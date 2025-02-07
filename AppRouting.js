@@ -5,7 +5,9 @@ import LoginScreen from "./screens/LoginScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { useAuth } from "./context/auth";
 import ScannerScreen from "./screens/ScannerScreen";
-import PrintDetailScreen from "./screens/PrintDetailScreen";
+import PrintScreen from "./screens/PrintScreen";
+import WarehouseScanScreen from "./screens/WarehouseScanScreen";
+import ClearTools from "./componets/ClearTools";
 
 const Stack = createStackNavigator();
 
@@ -24,7 +26,9 @@ export default function AppRouting() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Scanner" component={ScannerScreen} />
-          <Stack.Screen name="PrintDetail" component={PrintDetailScreen} />
+          <Stack.Screen name="Print" component={PrintScreen} />
+          <Stack.Screen name="Warehouse" component={WarehouseScanScreen} />
+          <Stack.Screen name="ClearTools" component={ClearTools} />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator screenOptions={{ headerShown: false }}>

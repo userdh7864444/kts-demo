@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, Linking } from "react-native";
 import { Card, Title, Paragraph } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 const menuItems = [
   {
@@ -16,47 +17,26 @@ const menuItems = [
     description: "AI-powered platform for seamless shipping.",
   },
   {
-    title: "Clear Tool",
+    title: "Clear By Shipper",
     url: "https://clear.eshipper.com/auth/login",
     image: require("../assets/logo/clearLogo.png"),
     description: "Efficient clearing and documentation tools.",
   },
   {
-    title: "One Click print ",
-    url: "/PrintDetail",
+    title: "One Click print",
     image: require("../assets/logo/printLogo.png"),
     description: "Instant label printing for faster processing.",
   },
   {
     title: "Warehouse Scan",
-    // url: "https://clear.eshipper.com/auth/login",
     image: require("../assets/logo/warehouseLogo.png"),
     description: "Smart scanning for streamlined warehouse management.",
   },
 ];
 
-const HomeScreen = ({ navigation }) => {
-  const handleItemPress = (item) => {
-    // Check if it's a web URL
-    if (item.url.startsWith("http")) {
-      Linking.openURL(item.url).catch((err) =>
-        console.error("Failed to open URL:", err)
-      );
-    }
-    // Handle internal screen navigation
-    else if (item.url.startsWith("/")) {
-      const routeName = item.url.replace("/", "");
+const HomeScreen = () => {
+  const navigation = useNavigation();
 
-      // Add your screen names here that should use internal navigation
-      const internalScreens = ["PrintDetail", "WarehouseScan"];
-
-      if (internalScreens.includes(routeName)) {
-        navigation.navigate(routeName);
-      } else {
-        console.warn(`No route defined for: ${routeName}`);
-      }
-    }
-  };
   return (
     <View style={styles.mainContainer}>
       <Image
@@ -69,7 +49,18 @@ const HomeScreen = ({ navigation }) => {
           <Card
             key={index}
             style={styles.card}
-            onPress={() => handleItemPress(item)}
+            onPress={() => {
+              if (item.url) {
+                Linking.openURL(item.url);
+              } else {
+                // Navigate to respective screen if URL is missing
+                if (item.title === "One Click print") {
+                  navigation.navigate("Print");
+                } else if (item.title === "Warehouse Scan") {
+                  navigation.navigate("Warehouse");
+                }
+              }
+            }}
           >
             <View style={styles.cardContent}>
               <Image

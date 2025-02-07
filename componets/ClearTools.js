@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   View,
@@ -9,7 +10,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { Card, Paragraph, Title } from "react-native-paper";
+import { Button, Card, Paragraph, Title } from "react-native-paper";
 
 const data = [
   { id: "1", tracking: "1Z88YW022030402954", status: "in" },
@@ -49,81 +50,121 @@ const menuItems = [
 ];
 const ClearTools = () => {
   const [search, setSearch] = useState("");
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null); // To track selected card
 
-  const filteredData = data.filter(
-    (item) =>
-      item.tracking.includes(search) ||
-      item.carrier.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredData = data.filter((item) => item.tracking.includes(search));
+  const navigation = useNavigation();
 
   return (
     <>
       <View style={styles.mainContainer}>
         <Image
-          source={require("../assets/logo/eshipperLogo.png")} // Adjust path based on file location
+          source={require("../assets/logo/eshipperLogo.png")}
           style={styles.logo}
           resizeMode="contain"
         />
-        <ScrollView style={{ flex: 1, marginTop: 20, marginBottom: 20 }}>
+
+        <ScrollView
+          style={{ flex: 1, marginTop: 20, marginBottom: 20, width: "100%" }}
+        >
           <View style={styles.container}>
-            <TextInput
-              style={styles.searchBar}
-              placeholder="Search tracking number..."
-              value={search}
-              onChangeText={setSearch}
-            />
-            <View style={styles.row}>
-              {menuItems.map((item, index) => (
-                <Card
-                  key={index}
-                  style={styles.card}
-                  onPress={() => Linking.openURL(item.url)}
+            {selectedCard ? (
+              <View>
+                <Button
+                  mode="contained"
+                  onPress={() => setSelectedCard(null)}
+                  style={styles.backButton}
+                  icon="arrow-left" // Directly using icon name
                 >
-                  <View style={styles.cardContent}>
-                    {/* <Image
-                      source={item.image}
-                      style={styles.image}
-                      resizeMode="contain"
-                    /> */}
-                    <View>
-                      <Title style={{ color: "#09a0a7" }}>{item.title}</Title>
-                      <Paragraph>{item.value}</Paragraph>
-                    </View>
-                  </View>
-                </Card>
-              ))}
-            </View>
-            <FlatList
-              data={filteredData}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.box}
-                  onPress={() =>
-                    setSelectedId(selectedId === item.id ? null : item.id)
-                  }
+                  Back
+                </Button>
+                <TextInput
+                  style={styles.searchBar}
+                  placeholder="Search tracking number..."
+                  value={search}
+                  onChangeText={setSearch}
+                />
+                <FlatList
+                  data={filteredData}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.box}>
+                      <View style={styles.listRow}>
+                        <Image
+                          source={require("../assets/logo/eshipperLogo.png")}
+                          style={styles.imageIcon}
+                          resizeMode="contain"
+                        />
+                        <Text style={styles.tracking}>{item.tracking}</Text>
+                        <Text
+                          style={[
+                            styles.status,
+                            { color: item.status === "in" ? "green" : "red" },
+                          ]}
+                        >
+                          {item.status}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                  scrollEnabled={false}
+                />
+              </View>
+            ) : (
+              <>
+                <Button
+                  mode="contained"
+                  onPress={() => navigation.goBack()}
+                  style={styles.backButton}
+                  icon="arrow-left" // Directly using icon name
                 >
-                  <View style={styles.listRow}>
-                    <Image
-                      source={require("../assets/logo/eshipperLogo.png")} // Adjust path based on file location
-                      style={styles.imageIcon}
-                      resizeMode="contain"
-                    />
-                    <Text style={styles.tracking}>{item.tracking}</Text>
-                    <Text
-                      style={[
-                        styles.status,
-                        { color: item.status === "in" ? "green" : "red" },
-                      ]}
+                  Back
+                </Button>
+                <View style={styles.row}>
+                  {menuItems.map((item, index) => (
+                    <Card
+                      key={index}
+                      style={styles.card}
+                      onPress={() => setSelectedCard(item.title)}
                     >
-                      {item.status}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              )}
-              scrollEnabled={false} // Disables FlatList's own scrolling
-            />
+                      <View style={styles.cardContent}>
+                        <View>
+                          <Title style={{ color: "#09a0a7" }}>
+                            {item.title}
+                          </Title>
+                          <Paragraph>{item.value}</Paragraph>
+                        </View>
+                      </View>
+                    </Card>
+                  ))}
+                </View>
+                <FlatList
+                  data={filteredData}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity style={styles.box}>
+                      <View style={styles.listRow}>
+                        <Image
+                          source={require("../assets/logo/eshipperLogo.png")}
+                          style={styles.imageIcon}
+                          resizeMode="contain"
+                        />
+                        <Text style={styles.tracking}>{item.tracking}</Text>
+                        <Text
+                          style={[
+                            styles.status,
+                            { color: item.status === "in" ? "green" : "red" },
+                          ]}
+                        >
+                          {item.status}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  )}
+                  scrollEnabled={false}
+                />
+              </>
+            )}
           </View>
         </ScrollView>
       </View>
@@ -134,22 +175,17 @@ const ClearTools = () => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    alignItems: "center", // Centers logo horizontally
+    alignItems: "center",
     backgroundColor: "#fff",
     width: "100%",
   },
   logo: {
-    width: 200, // Adjust as needed
-    height: 100, // Adjust as needed
+    width: 200,
+    height: 100,
     marginTop: 40,
   },
   container: {
     padding: 16,
-    backgroundColor: "red", // Light purple background
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
   },
   searchBar: {
     height: 40,
@@ -164,47 +200,38 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     backgroundColor: "#fff",
     borderRadius: 10,
-    elevation: 2, // Shadow for Android
-    shadowColor: "#000", // Shadow for iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
+    elevation: 2,
     borderColor: "#09a0a7",
     borderWidth: 2,
-    borderStyle: "solid", // Optional, defaults to "solid"
   },
   listRow: {
-    flexDirection: "row", // Align items in a row
-    alignItems: "center", // Center vertically
-    justifyContent: "center", // Center horizontally
-    gap: 10, // Add spacing between elements (React Native 0.71+)
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
   },
   image: {
     width: 40,
     height: 40,
   },
   tracking: {
-    flex: 1, // Distribute space evenly
+    flex: 1,
     fontSize: 16,
     fontWeight: "bold",
-    textAlign: "center", // Center text
+    textAlign: "center",
   },
   status: {
     fontSize: 14,
     fontWeight: "bold",
-    textAlign: "center", // Center text
-  },
-  container: {
-    flex: 1,
-    padding: 10,
+    textAlign: "center",
   },
   row: {
     flexDirection: "row",
-    flexWrap: "wrap", // Wraps to the next line if needed
+    flexWrap: "wrap",
     justifyContent: "space-between",
   },
   card: {
-    width: "48%", // Ensures 2 cards fit in a row
+    width: "48%",
     marginBottom: 10,
   },
   cardContent: {
@@ -213,6 +240,10 @@ const styles = StyleSheet.create({
   imageIcon: {
     width: 50,
     height: 50,
+  },
+  backButton: {
+    marginBottom: 10,
+    width: 100,
   },
 });
 
