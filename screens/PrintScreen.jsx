@@ -1,12 +1,13 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet, Text, Image, Linking } from "react-native";
-import { Card, Title, Paragraph } from "react-native-paper";
+import { Card, Title, Paragraph, Button } from "react-native-paper";
 
 const menuItems = [
   {
     title: "Eshipper",
     url: "https://dev.eshipper.com/",
-    image: require("../assets/logo/eshipperLogo.png"), 
+    image: require("../assets/logo/eshipperLogo.png"),
     description: "Comprehensive shipping solutions for businesses.",
   },
   {
@@ -18,6 +19,8 @@ const menuItems = [
 ];
 
 const PrintScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <>
       <View style={styles.mainContainer}>
@@ -27,6 +30,16 @@ const PrintScreen = () => {
           resizeMode="contain"
         />
         <View style={styles.container}>
+          <View>
+            <Button
+              mode="contained"
+              onPress={() => navigation.goBack()}
+              style={styles.backButton}
+              icon="arrow-left" // Directly using icon name
+            >
+              Back
+            </Button>
+          </View>
           {menuItems.map((item, index) => (
             <Card
               key={index}
@@ -89,6 +102,10 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1, // Take remaining space
+  },
+  backButton: {
+    marginBottom: 10,
+    width: 100,
   },
 });
 

@@ -1,23 +1,24 @@
 import React from "react";
 import { View, StyleSheet, Text, Image, Linking } from "react-native";
-import { Card, Title, Paragraph } from "react-native-paper";
+import { Card, Title, Paragraph, Button } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 const menuItems = [
   {
     title: "Eshipper",
-    url: "https://dev.eshipper.com/",
-    image: require("../assets/logo/eshipperLogo.png"), 
+    image: require("../assets/logo/eshipperLogo.png"),
     description: "Comprehensive shipping solutions for businesses.",
   },
   {
-    title: "Clear Tool",
-    url: "https://clear.eshipper.com/auth/login",
+    title: "Clear By Shipper",
     image: require("../assets/logo/clearLogo.png"),
     description: "Efficient clearing and documentation tools.",
   },
 ];
 
 const WarehouseScanScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.mainContainer}>
       <Image
@@ -26,11 +27,29 @@ const WarehouseScanScreen = () => {
         resizeMode="contain"
       />
       <View style={styles.container}>
+        <View>
+          <Button
+            mode="contained"
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}
+            icon="arrow-left" // Directly using icon name
+          >
+            Back
+          </Button>
+        </View>
+
         {menuItems.map((item, index) => (
           <Card
             key={index}
             style={styles.card}
-            onPress={() => Linking.openURL(item.url)}
+            onPress={() => {
+              // Navigate to respective screen if URL is missing
+              if (item.title === "Eshipper") {
+                navigation.navigate("ClearTools");
+              } else if (item.title === "Clear By Shipper") {
+                navigation.navigate("ClearTools");
+              }
+            }}
           >
             <View style={styles.cardContent}>
               <Image
@@ -87,6 +106,10 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1, // Take remaining space
+  },
+  backButton: {
+    marginBottom: 10,
+    width: 100,
   },
 });
 
