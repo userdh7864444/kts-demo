@@ -84,10 +84,8 @@ const ClearTools = () => {
                   value={search}
                   onChangeText={setSearch}
                 />
-                <FlatList
-                  data={filteredData}
-                  keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => (
+                {filteredData.map((item) => (
+                  <Card key={item.id} style={styles.cardList}>
                     <TouchableOpacity style={styles.box}>
                       <View style={styles.listRow}>
                         <Image
@@ -106,9 +104,8 @@ const ClearTools = () => {
                         </Text>
                       </View>
                     </TouchableOpacity>
-                  )}
-                  scrollEnabled={false}
-                />
+                  </Card>
+                ))}
               </View>
             ) : (
               <>
@@ -138,10 +135,9 @@ const ClearTools = () => {
                     </Card>
                   ))}
                 </View>
-                <FlatList
-                  data={filteredData}
-                  keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => (
+
+                {filteredData.map((item) => (
+                  <Card key={item.id} style={styles.cardList}>
                     <TouchableOpacity style={styles.box}>
                       <View style={styles.listRow}>
                         <Image
@@ -160,9 +156,8 @@ const ClearTools = () => {
                         </Text>
                       </View>
                     </TouchableOpacity>
-                  )}
-                  scrollEnabled={false}
-                />
+                  </Card>
+                ))}
               </>
             )}
           </View>
@@ -197,33 +192,23 @@ const styles = StyleSheet.create({
   },
   box: {
     padding: 10,
-    marginBottom: 10,
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    elevation: 2,
-    borderColor: "#09a0a7",
-    borderWidth: 2,
   },
   listRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    gap: 10,
+    justifyContent: "space-between",
   },
   image: {
     width: 40,
     height: 40,
   },
   tracking: {
-    flex: 1,
     fontSize: 16,
     fontWeight: "bold",
-    textAlign: "center",
   },
   status: {
     fontSize: 14,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: "600",
   },
   row: {
     flexDirection: "row",
@@ -240,6 +225,12 @@ const styles = StyleSheet.create({
   imageIcon: {
     width: 50,
     height: 50,
+  },
+  cardList: {
+    marginVertical: 8,
+    borderRadius: 10,
+    elevation: 4, // Adds shadow for Android
+    backgroundColor: "#ffff",
   },
   backButton: {
     marginBottom: 10,

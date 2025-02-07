@@ -8,6 +8,7 @@ import ScannerScreen from "./screens/ScannerScreen";
 import PrintScreen from "./screens/PrintScreen";
 import WarehouseScanScreen from "./screens/WarehouseScanScreen";
 import ClearTools from "./componets/ClearTools";
+import WebViewScreen from "./screens/WebViewScreen"; // Import WebViewScreen
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,8 @@ export default function AppRouting() {
           <Stack.Screen name="Print" component={PrintScreen} />
           <Stack.Screen name="Warehouse" component={WarehouseScanScreen} />
           <Stack.Screen name="ClearTools" component={ClearTools} />
+          <Stack.Screen name="WebViewScreen" component={WebViewScreen} />
+
         </Stack.Navigator>
       ) : (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
