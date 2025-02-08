@@ -214,6 +214,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+    width: "100%",
   },
   card: {
     width: "48%",
