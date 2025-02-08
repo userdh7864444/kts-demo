@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     bottom: 20, // Placed above exit button
     right: 20,
     borderRadius: 50,
-    backgroundColor: "red",
+    backgroundColor: "black",
     padding: 10,
   },
 });
