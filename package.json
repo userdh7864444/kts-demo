@@ -32,7 +32,8 @@
     "react-native-screens": "^4.4.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "^13.13.2",
-    "yarn": "^1.22.22"
+    "yarn": "^1.22.22",
+    "expo-blur": "~14.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

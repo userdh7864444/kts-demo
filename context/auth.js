@@ -36,7 +36,6 @@ export const AuthProvider = ({ children }) => {
     try {
       setProfileLoading(true);
       const response = await postLogin({ username, password });
-      console.log(response.data, "response");
 
       if (response.data?.token) {
         // Store token correctly
