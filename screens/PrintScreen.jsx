@@ -56,9 +56,11 @@ const PrintScreen = () => {
                   style={styles.image}
                   resizeMode="contain"
                 />
+                <View style={styles.verticleLine}></View>
+
                 <View style={styles.textContainer}>
-                  <Title>{item.title}</Title>
-                  <Paragraph>{item.description}</Paragraph>
+                  <Title style={styles.title}>{item.title}</Title>
+                  <Paragraph style={styles.title}>{item.description}</Paragraph>
                 </View>
               </View>
             </Card>
@@ -72,8 +74,6 @@ const PrintScreen = () => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    alignItems: "center",
-    backgroundColor: "#fff",
     width: "100%",
   },
   logo: {
@@ -83,14 +83,14 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 16,
-    backgroundColor: "#fff",
     width: "100%",
     justifyContent: "center",
   },
   card: {
     borderRadius: 10,
     marginBottom: 12,
-    padding: 10,
+    padding: 7,
+    backgroundColor: "#684bba",
   },
   cardContent: {
     flexDirection: "row",
@@ -103,11 +103,21 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   textContainer: {
-    flex: 1,
+    flex: 1, // Take remaining space
+    marginLeft: 10,
   },
+  title: {
+    color: "#fff",
+  },
+
   backButton: {
     marginBottom: 10,
     width: 100,
+  },
+  verticleLine: {
+    height: "100%",
+    width: 1,
+    backgroundColor: "#4686bb",
   },
 });
 
