@@ -7,6 +7,7 @@ const menuItems = [
   {
     title: "Eshipper",
     scannerType: "Eshipper",
+
     image: require("../assets/logo/eshipperLogo.png"),
     description: "Comprehensive shipping solutions for businesses.",
   },
@@ -43,7 +44,10 @@ const PrintScreen = () => {
             key={index}
             style={styles.card}
             onPress={() =>
-              navigation.navigate("Scanner", { scannerType: item.scannerType })
+              navigation.navigate("Scanner", {
+                scannerType: item.scannerType,
+                logo: item.image,
+              })
             }
           >
             <View style={styles.cardContent}>
