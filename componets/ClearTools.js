@@ -11,6 +11,7 @@ import {
   ScrollView,
 } from "react-native";
 import { Button, Card, Paragraph, Title } from "react-native-paper";
+import ScreenWrapper from "./ScreenWrapper ";
 
 const data = [
   { id: "1", tracking: "1Z88YW022030402954", status: "in" },
@@ -58,110 +59,112 @@ const ClearTools = () => {
   return (
     <>
       <View style={styles.mainContainer}>
-        <Image
-          source={require("../assets/logo/eshipperLogo.png")}
-          style={styles.logo}
-          resizeMode="contain"
-        />
+        <ScreenWrapper>
+          <Image
+            source={require("../assets/logo/eshipperLogo.png")}
+            style={styles.logo}
+            resizeMode="contain"
+          />
 
-        <ScrollView
-          style={{ flex: 1, marginTop: 20, marginBottom: 20, width: "100%" }}
-        >
-          <View style={styles.container}>
-            {selectedCard ? (
-              <View>
-                <Button
-                  mode="contained"
-                  onPress={() => setSelectedCard(null)}
-                  style={styles.backButton}
-                  icon="arrow-left" // Directly using icon name
-                >
-                  Back
-                </Button>
-                <TextInput
-                  style={styles.searchBar}
-                  placeholder="Search tracking number..."
-                  value={search}
-                  onChangeText={setSearch}
-                />
-                {filteredData.map((item) => (
-                  <Card key={item.id} style={styles.cardList}>
-                    <TouchableOpacity style={styles.box}>
-                      <View style={styles.listRow}>
-                        <Image
-                          source={require("../assets/logo/eshipperLogo.png")}
-                          style={styles.imageIcon}
-                          resizeMode="contain"
-                        />
-                        <Text style={styles.tracking}>{item.tracking}</Text>
-                        <Text
-                          style={[
-                            styles.status,
-                            { color: item.status === "in" ? "green" : "red" },
-                          ]}
-                        >
-                          {item.status}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  </Card>
-                ))}
-              </View>
-            ) : (
-              <>
-                <Button
-                  mode="contained"
-                  onPress={() => navigation.goBack()}
-                  style={styles.backButton}
-                  icon="arrow-left" // Directly using icon name
-                >
-                  Back
-                </Button>
-                <View style={styles.row}>
-                  {menuItems.map((item, index) => (
-                    <Card
-                      key={index}
-                      style={styles.card}
-                      onPress={() => setSelectedCard(item.title)}
-                    >
-                      <View style={styles.cardContent}>
-                        <View>
-                          <Title style={{ color: "#09a0a7" }}>
-                            {item.title}
-                          </Title>
-                          <Paragraph>{item.value}</Paragraph>
+          <ScrollView
+            style={{ flex: 1, marginTop: 20, marginBottom: 20, width: "100%" }}
+          >
+            <View style={styles.container}>
+              {selectedCard ? (
+                <View>
+                  <Button
+                    mode="contained"
+                    onPress={() => setSelectedCard(null)}
+                    style={styles.backButton}
+                    icon="arrow-left" // Directly using icon name
+                  >
+                    Back
+                  </Button>
+                  <TextInput
+                    style={styles.searchBar}
+                    placeholder="Search tracking number..."
+                    value={search}
+                    onChangeText={setSearch}
+                  />
+                  {filteredData.map((item) => (
+                    <Card key={item.id} style={styles.cardList}>
+                      <TouchableOpacity style={styles.box}>
+                        <View style={styles.listRow}>
+                          <Image
+                            source={require("../assets/logo/eshipperLogo.png")}
+                            style={styles.imageIcon}
+                            resizeMode="contain"
+                          />
+                          <Text style={styles.tracking}>{item.tracking}</Text>
+                          <Text
+                            style={[
+                              styles.status,
+                              { color: item.status === "in" ? "green" : "red" },
+                            ]}
+                          >
+                            {item.status}
+                          </Text>
                         </View>
-                      </View>
+                      </TouchableOpacity>
                     </Card>
                   ))}
                 </View>
+              ) : (
+                <>
+                  <Button
+                    mode="contained"
+                    onPress={() => navigation.goBack()}
+                    style={styles.backButton}
+                    icon="arrow-left" // Directly using icon name
+                  >
+                    Back
+                  </Button>
+                  <View style={styles.row}>
+                    {menuItems.map((item, index) => (
+                      <Card
+                        key={index}
+                        style={styles.card}
+                        onPress={() => setSelectedCard(item.title)}
+                      >
+                        <View style={styles.cardContent}>
+                          <View>
+                            <Title style={{ color: "#09a0a7" }}>
+                              {item.title}
+                            </Title>
+                            <Paragraph>{item.value}</Paragraph>
+                          </View>
+                        </View>
+                      </Card>
+                    ))}
+                  </View>
 
-                {filteredData.map((item) => (
-                  <Card key={item.id} style={styles.cardList}>
-                    <TouchableOpacity style={styles.box}>
-                      <View style={styles.listRow}>
-                        <Image
-                          source={require("../assets/logo/eshipperLogo.png")}
-                          style={styles.imageIcon}
-                          resizeMode="contain"
-                        />
-                        <Text style={styles.tracking}>{item.tracking}</Text>
-                        <Text
-                          style={[
-                            styles.status,
-                            { color: item.status === "in" ? "green" : "red" },
-                          ]}
-                        >
-                          {item.status}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  </Card>
-                ))}
-              </>
-            )}
-          </View>
-        </ScrollView>
+                  {filteredData.map((item) => (
+                    <Card key={item.id} style={styles.cardList}>
+                      <TouchableOpacity style={styles.box}>
+                        <View style={styles.listRow}>
+                          <Image
+                            source={require("../assets/logo/eshipperLogo.png")}
+                            style={styles.imageIcon}
+                            resizeMode="contain"
+                          />
+                          <Text style={styles.tracking}>{item.tracking}</Text>
+                          <Text
+                            style={[
+                              styles.status,
+                              { color: item.status === "in" ? "green" : "red" },
+                            ]}
+                          >
+                            {item.status}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    </Card>
+                  ))}
+                </>
+              )}
+            </View>
+          </ScrollView>
+        </ScreenWrapper>
       </View>
     </>
   );
@@ -214,6 +217,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+    width: "100%",
   },
   card: {
     width: "48%",

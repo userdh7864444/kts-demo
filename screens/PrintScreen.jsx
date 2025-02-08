@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import { Card, Title, Paragraph, Button } from "react-native-paper";
+import ScreenWrapper from "../componets/ScreenWrapper ";
 
 const menuItems = [
   {
@@ -24,46 +25,47 @@ const PrintScreen = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <Image
-        source={require("../assets/logo/eshipperLogo.png")}
-        style={styles.logo}
-        resizeMode="contain"
-      />
-      <View style={styles.container}>
-        <Button
-          mode="contained"
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}
-          icon="arrow-left"
-        >
-          Back
-        </Button>
-
-        {menuItems.map((item, index) => (
-          <Card
-            key={index}
-            style={styles.card}
-            onPress={() =>
-              navigation.navigate("Scanner", {
-                scannerType: item.scannerType,
-                logo: item.image,
-              })
-            }
+      <ScreenWrapper>
+        <Image
+          source={require("../assets/logo/eshipperLogo.png")}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <View style={styles.container}>
+          <Button
+            mode="contained"
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}
+            icon="arrow-left"
           >
-            <View style={styles.cardContent}>
-              <Image
-                source={item.image}
-                style={styles.image}
-                resizeMode="contain"
-              />
-              <View style={styles.textContainer}>
-                <Title>{item.title}</Title>
-                <Paragraph>{item.description}</Paragraph>
+            Back
+          </Button>
+
+          {menuItems.map((item, index) => (
+            <Card
+              key={index}
+              style={styles.card}
+              onPress={() =>
+                navigation.navigate("Scanner", {
+                  scannerType: item.scannerType,
+                })
+              }
+            >
+              <View style={styles.cardContent}>
+                <Image
+                  source={item.image}
+                  style={styles.image}
+                  resizeMode="contain"
+                />
+                <View style={styles.textContainer}>
+                  <Title>{item.title}</Title>
+                  <Paragraph>{item.description}</Paragraph>
+                </View>
               </View>
-            </View>
-          </Card>
-        ))}
-      </View>
+            </Card>
+          ))}
+        </View>
+      </ScreenWrapper>
     </View>
   );
 };
