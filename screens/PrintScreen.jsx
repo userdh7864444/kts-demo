@@ -8,6 +8,7 @@ const menuItems = [
   {
     title: "Eshipper",
     scannerType: "Eshipper",
+
     image: require("../assets/logo/eshipperLogo.png"),
     description: "Comprehensive shipping solutions for businesses.",
   },
