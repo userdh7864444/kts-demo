@@ -48,6 +48,7 @@ const PrintScreen = () => {
               onPress={() =>
                 navigation.navigate("Scanner", {
                   scannerType: item.scannerType,
+                  logo: item.image,
                 })
               }
             >
