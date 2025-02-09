@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image, Linking } from "react-native";
 import { Card, Title, Paragraph, Button } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import ScreenWrapper from "../componets/ScreenWrapper ";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import icon library
 
 const menuItems = [
   {
@@ -29,17 +30,16 @@ const WarehouseScanScreen = () => {
           resizeMode="contain"
         />
         <View style={styles.container}>
-          <View>
-            <Button
-              mode="contained"
-              onPress={() => navigation.goBack()}
-              style={styles.backButton}
-              icon="arrow-left" // Directly using icon name
-            >
-              Back
-            </Button>
+          <View style={styles.buttonConatiner}>
+            <Text onPress={() => navigation.goBack()} style={styles.backButton}>
+              <Icon name="arrow-left" size={20} color="white" />
+              {/* Left Arrow Icon */}{" "}
+            </Text>
+            <Title style={styles.mainTitle}>Warehouse Scan</Title>
           </View>
-
+          <Paragraph style={styles.description}>
+          Smart scanning for streamlined warehouse management.
+          </Paragraph>
           {menuItems.map((item, index) => (
             <Card
               key={index}
@@ -115,10 +115,26 @@ const styles = StyleSheet.create({
   title: {
     color: "#fff",
   },
-
+  mainTitle: {
+    color: "#fff",
+    fontSize: 25, // Increase Font Size
+    marginTop: 7,
+  },
+  description: {
+    color: "#fff",
+    marginBottom: 20,
+  },
+  buttonConatiner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
   backButton: {
-    marginBottom: 10,
-    width: 100,
+    backgroundColor: "#684bba",
+    borderRadius: 25, // Fully rounded (half of width/height)
+    width: 40,
+    paddingLeft: 7,
+    paddingTop: 2,
   },
   verticleLine: {
     height: "100%",

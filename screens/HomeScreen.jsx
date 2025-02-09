@@ -55,7 +55,7 @@ const HomeScreen = () => {
           style={styles.logo}
           resizeMode="contain"
         />
-        <Text style={styles.sectionTitle}>Browser Links</Text>
+        <Text style={styles.sectionTitle}>Eshipper Products</Text>
 
         <View style={styles.container}>
           {menuItems.map((item, index) => (
@@ -84,7 +84,7 @@ const HomeScreen = () => {
             </Card>
           ))}
         </View>
-        <Text style={styles.sectionTitle}>Tools</Text>
+        <Text style={styles.sectionTitle}>Eshipper Tools</Text>
         <View style={styles.container}>
           {toolItems.map((item, index) => (
             <Card
