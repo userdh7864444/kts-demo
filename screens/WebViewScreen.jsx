@@ -9,7 +9,7 @@ const WebViewScreen = ({ route }) => {
     <WebView
       source={{ uri: url }}
       startInLoadingState
-      renderLoading={() => <ActivityIndicator size="large" color="#09a0a7" />}
+      // renderLoading={() => <ActivityIndicator size="large" color="#09a0a7" />}
     />
   );
 };

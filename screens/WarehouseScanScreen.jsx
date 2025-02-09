@@ -59,6 +59,8 @@ const WarehouseScanScreen = () => {
                   style={styles.image}
                   resizeMode="contain"
                 />
+                <View style={styles.verticleLine}></View>
+
                 <View style={styles.textContainer}>
                   <Title style={styles.title}>{item.title}</Title>
                   <Paragraph style={styles.title}>{item.description}</Paragraph>
@@ -75,14 +77,13 @@ const WarehouseScanScreen = () => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    // alignItems: "center", // Centers logo horizontally
-    // backgroundColor: "#fff",
     width: "100%",
   },
   logo: {
     width: 200, // Adjust as needed
     height: 100, // Adjust as needed
     marginTop: 40,
+    marginLeft: 10,
   },
   container: {
     padding: 16,
@@ -109,6 +110,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1, // Take remaining space
+    marginLeft: 10,
   },
   title: {
     color: "#fff",
@@ -117,6 +119,11 @@ const styles = StyleSheet.create({
   backButton: {
     marginBottom: 10,
     width: 100,
+  },
+  verticleLine: {
+    height: "100%",
+    width: 1,
+    backgroundColor: "#4686bb",
   },
 });
 
