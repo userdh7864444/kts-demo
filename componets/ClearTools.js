@@ -43,12 +43,12 @@ const menuItems = [
     image: require("../assets/icon/outbound.jpg"),
     value: 50,
   },
-  {
-    title: "Close Scan",
-    url: "https://myship.ai/",
-    image: require("../assets/icon/closeScan.jpg"),
-    value: 25,
-  },
+  // {
+  //   title: "Close Scan",
+  //   url: "https://myship.ai/",
+  //   image: require("../assets/icon/closeScan.jpg"),
+  //   value: 25,
+  // },
 ];
 const ClearTools = () => {
   const [search, setSearch] = useState("");
@@ -94,20 +94,29 @@ const ClearTools = () => {
                     <Card key={item.id} style={styles.cardList}>
                       <TouchableOpacity style={styles.box}>
                         <View style={styles.listRow}>
-                          <Image
-                            source={require("../assets/logo/eshipperLogo.png")}
-                            style={styles.imageIcon}
-                            resizeMode="contain"
-                          />
-                          <Text style={styles.tracking}>{item.tracking}</Text>
-                          <Text
-                            style={[
-                              styles.status,
-                              { color: item.status === "in" ? "green" : "red" },
-                            ]}
-                          >
-                            {item.status}
-                          </Text>
+                          <View>
+                            <Image
+                              source={require("../assets/logo/eshipperLogo.png")}
+                              style={styles.imageIcon}
+                              resizeMode="contain"
+                            />
+                            <Text style={styles.tracking}>{item.tracking}</Text>
+                          </View>
+                          <View style={styles.statusContainer}>
+                            <Text
+                              style={[
+                                styles.status,
+                                {
+                                  color:
+                                    item.status === "in" ? "green" : "white",
+                                  backgroundColor:
+                                    item.status === "in" ? "lightgreen" : "red",
+                                },
+                              ]}
+                            >
+                              {item.status}
+                            </Text>
+                          </View>
                         </View>
                       </TouchableOpacity>
                     </Card>
@@ -134,54 +143,69 @@ const ClearTools = () => {
                           style={styles.card}
                           onPress={() => setSelectedCard(item.title)}
                         >
-                          <View style={styles.cardContent}>
-                            <Image
-                              source={item.image}
-                              style={styles.imageIconFilter}
-                              resizeMode="contain"
-                            />
-                            <View
-                              style={{
-                                flex: 1, // Take remaining space
-                                marginLeft: 10,
-                              }}
-                            >
-                              <Title style={styles.title}>{item.title}</Title>
-                              <Paragraph style={styles.description}>
-                                {" "}
-                                {item.value}
-                              </Paragraph>
-                            </View>
-                        
-                            <Image
-                              source={require("../assets/icon/details.jpg")}
-                              style={styles.imageIconFilter}
-                              resizeMode="contain"
-                            />
+                          {/* <View style={styles.cardContent}> */}
+                          <Image
+                            source={item.image}
+                            style={styles.imageIconFilter}
+                            resizeMode="contain"
+                          />
+                          <View
+                            style={{
+                              flex: 1, // Take remaining space
+                              marginLeft: 10,
+                            }}
+                          >
+                            <Title style={styles.title}>{item.title}</Title>
+                            <Paragraph style={styles.description}>
+                              {" "}
+                              {item.value}
+                            </Paragraph>
                           </View>
+                          {/* </View> */}
                         </Card>
                       );
                     })}
                   </View>
-
+                  <TouchableOpacity
+                    style={styles.closeButtonContainer}
+                    // onPress={onPress}
+                  >
+                    <View style={styles.closeScanButton}>
+                      <Image
+                        source={require("../assets/icon/closeScan.jpg")}
+                        style={styles.buttonIcon}
+                        resizeMode="contain"
+                      />
+                      <Text style={styles.mainTitle}>Close Scan</Text>
+                    </View>
+                  </TouchableOpacity>
                   {filteredData.map((item) => (
                     <Card key={item.id} style={styles.cardList}>
                       <TouchableOpacity style={styles.box}>
                         <View style={styles.listRow}>
-                          <Image
-                            source={require("../assets/logo/eshipperLogo.png")}
-                            style={styles.imageIcon}
-                            resizeMode="contain"
-                          />
-                          <Text style={styles.tracking}>{item.tracking}</Text>
-                          <Text
-                            style={[
-                              styles.status,
-                              { color: item.status === "in" ? "green" : "red" },
-                            ]}
-                          >
-                            {item.status}
-                          </Text>
+                          <View>
+                            <Image
+                              source={require("../assets/logo/eshipperLogo.png")}
+                              style={styles.imageIcon}
+                              resizeMode="contain"
+                            />
+                            <Text style={styles.tracking}>{item.tracking}</Text>
+                          </View>
+                          <View style={styles.statusContainer}>
+                            <Text
+                              style={[
+                                styles.status,
+                                {
+                                  color:
+                                    item.status === "in" ? "green" : "white",
+                                  backgroundColor:
+                                    item.status === "in" ? "lightgreen" : "red",
+                                },
+                              ]}
+                            >
+                              {item.status}
+                            </Text>
+                          </View>
                         </View>
                       </TouchableOpacity>
                     </Card>
@@ -232,23 +256,33 @@ const styles = StyleSheet.create({
     height: 40,
   },
   tracking: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "bold",
   },
   status: {
     fontSize: 14,
     fontWeight: "600",
+    backgroundColor: "red",
+    borderRadius: 20,
+    width: 50, // Increase width for better visibility
+    height: 30, // Fixed height to maintain shape
+    textAlign: "center", // Centers text horizontally
+    justifyContent: "center", // Needed for View but not for Text
+    alignItems: "center", // Needed for View but not for Text
+    textAlignVertical: "center", // Centers text vertically (Android)
   },
+
   row: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
     width: "100%",
+    marginBottom: 30,
   },
   card: {
-    width: "100%",
+    width: "48%",
     marginBottom: 10,
-    backgroundColor: "#684bba",
+    backgroundColor: "#7b7c7e",
   },
   title: {
     color: "#fff",
@@ -263,20 +297,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageIcon: {
-    width: 50,
-    height: 50,
+    width: 80,
+    height: 35,
   },
   imageIconFilter: {
-    width: 20,
-    height: 20,
-    // color:"#fff"
+    // backgroundColor: "black",
+    borderRadius: 40,
+    width: 50, // Increase width for better visibility
+    height: 30, // Fixed height to maintain shape
+    // textAlign: "center", // Centers text horizontally
+    // justifyContent: "center", // Needed for View but not for Text
+    // alignItems: "center", // Needed for View but not for Text
+    // textAlignVertical: "center", // Centers text vertically (Android)
+    // paddingLeft: 15,
   },
 
   cardList: {
     marginVertical: 8,
     borderRadius: 10,
     elevation: 4, // Adds shadow for Android
-    backgroundColor: "#ffff",
+    backgroundColor: "#ccc",
   },
   mainTitle: {
     color: "#fff",
@@ -288,6 +328,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
     marginBottom: 20,
+  },
+  closeButtonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    marginBottom: 20,
+  },
+  closeScanButton: {
+    backgroundColor: "#7b7c7e",
+    borderRadius: 10,
+    padding: 7,
+    flexDirection: "row",
+    alignItems: "center",
+    width: 130, // Increased width for better UI
+    justifyContent: "center",
+  },
+  buttonIcon: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
   },
   backButton: {
     backgroundColor: "#684bba",

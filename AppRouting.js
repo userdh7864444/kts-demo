@@ -37,13 +37,14 @@ export default function AppRouting() {
             style={styles.logoutButton}
             onPress={() => {
               Alert.alert(
-                "Logout",
-                "Are you sure you want to logout?",
+                "Exit App",
+                "Are u sure you want to logout?",
                 [
                   { text: "Cancel", style: "cancel" },
-                  { text: "Logout", onPress: () => logout() },
+                  { text: "Sure, Exit", onPress: () => logout() },
                 ],
                 { cancelable: false }
+                
               );
             }}
           >
