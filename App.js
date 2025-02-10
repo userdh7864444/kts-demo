@@ -2,11 +2,14 @@
 import * as React from "react";
 import AppRouting from "./AppRouting";
 import { AuthProvider } from "./context/auth";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
   return (
-    <AuthProvider>
-      <AppRouting />
-    </AuthProvider>
+    <SafeAreaProvider>
+      <AuthProvider>
+        <AppRouting />
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }
