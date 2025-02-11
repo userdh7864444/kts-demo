@@ -68,28 +68,30 @@ const ClearTools = () => {
           />
 
           <ScrollView
-            style={{ flex: 1, marginTop: 20, marginBottom: 20, width: "100%" }}
+            style={{ flex: 1, marginTop: 10, marginBottom: 20, width: "100%" }}
           >
             <View style={styles.container}>
               {selectedCard ? (
                 <>
-                  <View style={styles.buttonConatiner}>
-                    <Text
-                      onPress={() => setSelectedCard(null)}
-                      style={styles.backButton}
-                    >
-                      <Icon name="arrow-left" size={20} color="white" />
-                      {/* Left Arrow Icon */}{" "}
-                    </Text>
-                    <Title style={styles.mainTitle}>Clear By Shipper</Title>
-                  </View>
-                  <TextInput
+                  <TouchableOpacity
+                    onPress={() =>
+                      selectedCard ? setSelectedCard(null) : navigation.goBack()
+                    }
+                    style={styles.backButtonContainer}
+                    accessibilityRole="button"
+                    accessibilityLabel="Go back"
+                  >
+                    <View style={styles.backButton}>
+                      <Icon name="chevron-left" size={40} color="white" />
+                    </View>
+                  </TouchableOpacity>
+                  {/* <TextInput
                     style={styles.searchBar}
                     placeholderTextColor="white"
                     placeholder="Search tracking number..."
                     value={search}
                     onChangeText={setSearch}
-                  />
+                  /> */}
                   {filteredData.map((item) => (
                     <Card key={item.id} style={styles.cardList}>
                       <TouchableOpacity style={styles.box}>
@@ -124,51 +126,55 @@ const ClearTools = () => {
                 </>
               ) : (
                 <>
-                  <View style={styles.buttonConatiner}>
-                    <Text
-                      onPress={() => navigation.goBack()}
-                      style={styles.backButton}
-                    >
-                      <Icon name="arrow-left" size={20} color="white" />
-                      {/* Left Arrow Icon */}{" "}
-                    </Text>
-                    <Title style={styles.mainTitle}>Clear By Shipper</Title>
-                  </View>
+                  <TouchableOpacity
+                    onPress={() =>
+                      selectedCard ? setSelectedCard(null) : navigation.goBack()
+                    }
+                    style={styles.backButtonContainer}
+                    accessibilityRole="button"
+                    accessibilityLabel="Go back"
+                  >
+                    <View style={styles.backButton}>
+                      <Icon name="chevron-left" size={40} color="white" />
+                    </View>
+                  </TouchableOpacity>
                   <View style={styles.row}>
                     {menuItems.map((item, index) => {
-                      console.log(item, "item");
                       return (
                         <Card
                           key={index}
                           style={styles.card}
                           onPress={() => setSelectedCard(item.title)}
                         >
-                          {/* <View style={styles.cardContent}> */}
-                          <Image
-                            source={item.image}
-                            style={styles.imageIconFilter}
-                            resizeMode="contain"
-                          />
                           <View
                             style={{
-                              flex: 1, // Take remaining space
-                              marginLeft: 10,
+                              flexDirection: "row",
+                              alignItems: "center",
                             }}
                           >
-                            <Title style={styles.title}>{item.title}</Title>
-                            <Paragraph style={styles.description}>
-                              {" "}
-                              {item.value}
-                            </Paragraph>
+                            <View style={styles.imageIconFilter}>
+                              <Image
+                                source={item.image}
+                                style={{ width: 30, height: 30 }}
+                                resizeMode="contain"
+                              />
+                            </View>
+                            <View style={{ marginLeft: 16 }}>
+                              <Text style={styles.title}>{item.title}</Text>
+                              <Text style={styles.description}>
+                                {item.value}
+                              </Text>
+                            </View>
                           </View>
-                          {/* </View> */}
                         </Card>
                       );
                     })}
                   </View>
                   <TouchableOpacity
                     style={styles.closeButtonContainer}
-                    // onPress={onPress}
+                    onPress={() => {
+                      /* Add your handler */
+                    }}
                   >
                     <View style={styles.closeScanButton}>
                       <Image
@@ -176,7 +182,7 @@ const ClearTools = () => {
                         style={styles.buttonIcon}
                         resizeMode="contain"
                       />
-                      <Text style={styles.mainTitle}>Close Scan</Text>
+                      <Text style={styles.buttonText}>Close Scan</Text>
                     </View>
                   </TouchableOpacity>
                   {filteredData.map((item) => (
@@ -233,6 +239,7 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 16,
+    paddingTop: 0,
   },
   searchBar: {
     height: 40,
@@ -273,22 +280,75 @@ const styles = StyleSheet.create({
   },
 
   row: {
-    flexDirection: "row",
+    // flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
     width: "100%",
     marginBottom: 30,
   },
   card: {
-    width: "48%",
+    width: "100%",
     marginBottom: 10,
-    backgroundColor: "#7b7c7e",
+    backgroundColor: "#5A4BAE", // More vibrant color
+    borderRadius: 12,
+    padding: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
   },
   title: {
     color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 4,
   },
   description: {
     color: "#fff",
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  imageIconFilter: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "rgba(255,255,255,0.2)", // Light background for icon
+    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  closeButtonContainer: {
+    marginVertical: 5,
+    alignSelf: "flex-end", // Align to right
+  },
+  closeScanButton: {
+    backgroundColor: "#FF4757", // Vibrant red for attention
+    borderRadius: 25, // Pill shape
+    paddingVertical: 12,
+    paddingHorizontal: 25,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    width: "auto",
+    marginTop: -20, // Auto width based on content
+  },
+  buttonIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+    // tintColor: "#fff", // White icon
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "600",
+    letterSpacing: 0.5,
   },
   cardContent: {
     padding: 10,
@@ -300,23 +360,12 @@ const styles = StyleSheet.create({
     width: 80,
     height: 35,
   },
-  imageIconFilter: {
-    // backgroundColor: "black",
-    borderRadius: 40,
-    width: 50, // Increase width for better visibility
-    height: 30, // Fixed height to maintain shape
-    // textAlign: "center", // Centers text horizontally
-    // justifyContent: "center", // Needed for View but not for Text
-    // alignItems: "center", // Needed for View but not for Text
-    // textAlignVertical: "center", // Centers text vertically (Android)
-    // paddingLeft: 15,
-  },
 
   cardList: {
     marginVertical: 8,
     borderRadius: 10,
     elevation: 4, // Adds shadow for Android
-    backgroundColor: "#ccc",
+    backgroundColor: "#fff",
   },
   mainTitle: {
     color: "#fff",
@@ -335,26 +384,26 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     marginBottom: 20,
   },
-  closeScanButton: {
-    backgroundColor: "#7b7c7e",
-    borderRadius: 10,
-    padding: 7,
-    flexDirection: "row",
-    alignItems: "center",
-    width: 130, // Increased width for better UI
+
+  // buttonIcon: {
+  //   width: 20,
+  //   height: 20,
+  //   marginRight: 5,
+  // },
+  backButtonContainer: {
     justifyContent: "center",
-  },
-  buttonIcon: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
+    alignItems: "center",
+    backgroundColor: "#684bba",
+    borderRadius: 25, // Fully rounded
+    width: 40, // Slightly larger for better touch area
+    height: 40,
+    marginBottom: 10,
+    marginRight: 10, // Add some spacing between the button and the title
   },
   backButton: {
-    backgroundColor: "#684bba",
-    borderRadius: 25, // Fully rounded (half of width/height)
-    width: 40,
-    paddingLeft: 7,
-    paddingTop: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: -5,
   },
 });
 

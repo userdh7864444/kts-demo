@@ -1,15 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
-import { Card, Title, Paragraph, Button } from "react-native-paper";
+import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import { Card, Divider } from "react-native-paper";
 import ScreenWrapper from "../componets/ScreenWrapper ";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import icon library
+
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const menuItems = [
   {
     title: "Eshipper",
     scannerType: "Eshipper",
-
     image: require("../assets/logo/eshipperLogo.png"),
     description: "Comprehensive shipping solutions for businesses.",
   },
@@ -33,20 +33,23 @@ const PrintScreen = () => {
           resizeMode="contain"
         />
         <View style={styles.container}>
-          <View style={styles.buttonConatiner}>
-            <Text onPress={() => navigation.goBack()} style={styles.backButton}>
-              <Icon
-                name="arrow-left"
-                size={20}
-                color="white"
-              />
-              {/* Left Arrow Icon */}{" "}
-            </Text>
-            <Title style={styles.mainTitle}>One Click print</Title>
+          <View style={styles.headerConteiner}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={styles.backButtonContainer}
+              accessibilityRole="button"
+              accessibilityLabel="Go back"
+            >
+              <View style={styles.backButton}>
+                <Icon name="chevron-left" size={40} color="white" />
+              </View>
+            </TouchableOpacity>
+
+            <Text style={styles.mainTitle}>One Click Print</Text>
           </View>
-          <Paragraph style={styles.description}>
+          <Text style={styles.description}>
             Instant label printing for faster processing.
-          </Paragraph>
+          </Text>
           {menuItems.map((item, index) => (
             <Card
               key={index}
@@ -64,11 +67,10 @@ const PrintScreen = () => {
                   style={styles.image}
                   resizeMode="contain"
                 />
-                <View style={styles.verticleLine}></View>
-
+                <Divider style={styles.verticleLine} />
                 <View style={styles.textContainer}>
-                  <Title style={styles.title}>{item.title}</Title>
-                  <Paragraph style={styles.title}>{item.description}</Paragraph>
+                  <Text style={styles.heading}>{item.title}</Text>
+                  <Text style={styles.title}>{item.description}</Text>
                 </View>
               </View>
             </Card>
@@ -93,57 +95,73 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
     width: "100%",
+    paddingTop: 0,
     justifyContent: "center",
   },
   card: {
+    borderWidth: 2,
+    borderColor: "lightgray",
     borderRadius: 10,
     marginBottom: 12,
     padding: 7,
-    backgroundColor: "#684bba",
+    backgroundColor: "#fff",
   },
   cardContent: {
     flexDirection: "row",
     alignItems: "center",
   },
   image: {
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
     borderRadius: 30,
     marginRight: 10,
   },
   textContainer: {
-    flex: 1, // Take remaining space
+    flex: 1,
     marginLeft: 10,
   },
+  heading: {
+    fontWeight: "bold",
+    marginBottom: 0,
+    color: "black",
+  },
   title: {
-    color: "#fff",
+    color: "#000",
   },
   mainTitle: {
     color: "#fff",
-    fontSize: 25, // Increase Font Size
-    marginTop:7
-
+    fontSize: 25,
+    marginTop: 7,
+    fontWeight: "600",
   },
   description: {
     color: "#fff",
     marginBottom: 20,
   },
-  buttonConatiner: {
+  headerConteiner: {
+    display: "flex",
     flexDirection: "row",
+  },
+  backButtonContainer: {
+    justifyContent: "center",
     alignItems: "center",
-    gap: 10,
+    backgroundColor: "#684bba",
+    borderRadius: 25,
+    width: 40,
+    height: 40,
+    marginBottom: 10,
+    marginRight: 10,
   },
   backButton: {
-    backgroundColor: "#684bba",
-    borderRadius: 25, // Fully rounded (half of width/height)
-    width: 40,
-    paddingLeft:7,
-    paddingTop:2
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: -5,
   },
   verticleLine: {
-    height: "100%",
-    width: 1,
-    backgroundColor: "#4686bb",
+    height: "80%",
+    width: 3,
+    borderRadius: 100,
+    backgroundColor: "#63c7d0",
   },
 });
 
