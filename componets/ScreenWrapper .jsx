@@ -1,14 +1,14 @@
 import React from "react";
 import { ImageBackground, View, StyleSheet } from "react-native";
 
-const ScreenWrapper = ({ children }) => {
+const ScreenWrapper = ({children}) => {
   return (
     <ImageBackground
-      source={require("../assets/background/homeBackground.png")}
+      source={require("../assets/background/login.png")}
       style={styles.background}
     >
       <View style={styles.overlay}>{children}</View>
-    </ImageBackground>
+      </ImageBackground>
   );
 };
 
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(104, 89, 107, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
 });
 
