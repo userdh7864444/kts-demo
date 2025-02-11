@@ -35,16 +35,12 @@ const PrintScreen = () => {
         <View style={styles.container}>
           <View style={styles.buttonConatiner}>
             <Text onPress={() => navigation.goBack()} style={styles.backButton}>
-              <Icon
-                name="arrow-left"
-                size={20}
-                color="white"
-              />
+              <Icon name="arrow-left" size={20} color="white" />
               {/* Left Arrow Icon */}{" "}
             </Text>
             <Title style={styles.mainTitle}>One Click print</Title>
           </View>
-          <Paragraph style={styles.description}>
+          <Paragraph style={styles.maindescription}>
             Instant label printing for faster processing.
           </Paragraph>
           {menuItems.map((item, index) => (
@@ -68,7 +64,7 @@ const PrintScreen = () => {
 
                 <View style={styles.textContainer}>
                   <Title style={styles.title}>{item.title}</Title>
-                  <Paragraph style={styles.title}>{item.description}</Paragraph>
+                  <Paragraph style={styles.description}>{item.description}</Paragraph>
                 </View>
               </View>
             </Card>
@@ -99,14 +95,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 12,
     padding: 7,
-    backgroundColor: "#684bba",
+    backgroundColor: "#d1d1d1",
   },
   cardContent: {
     flexDirection: "row",
     alignItems: "center",
   },
   image: {
-    width: 60,
+    width: 70,
     height: 60,
     borderRadius: 30,
     marginRight: 10,
@@ -116,15 +112,18 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   title: {
-    color: "#fff",
+    color: "#000000",
+    fontWeight: "600",
+  },
+  description: {
+    color: "#646464",
   },
   mainTitle: {
     color: "#fff",
     fontSize: 25, // Increase Font Size
-    marginTop:7
-
+    marginTop: 7,
   },
-  description: {
+  maindescription: {
     color: "#fff",
     marginBottom: 20,
   },
@@ -137,8 +136,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#684bba",
     borderRadius: 25, // Fully rounded (half of width/height)
     width: 40,
-    paddingLeft:7,
-    paddingTop:2
+    paddingLeft: 7,
+    paddingTop: 2,
   },
   verticleLine: {
     height: "100%",

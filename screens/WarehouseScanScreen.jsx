@@ -37,7 +37,7 @@ const WarehouseScanScreen = () => {
             </Text>
             <Title style={styles.mainTitle}>Warehouse Scan</Title>
           </View>
-          <Paragraph style={styles.description}>
+          <Paragraph style={styles.maindescription}>
           Smart scanning for streamlined warehouse management.
           </Paragraph>
           {menuItems.map((item, index) => (
@@ -63,7 +63,7 @@ const WarehouseScanScreen = () => {
 
                 <View style={styles.textContainer}>
                   <Title style={styles.title}>{item.title}</Title>
-                  <Paragraph style={styles.title}>{item.description}</Paragraph>
+                  <Paragraph style={styles.description}>{item.description}</Paragraph>
                 </View>
               </View>
             </Card>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 12,
     padding: 7,
-    backgroundColor: "#684bba",
+    backgroundColor: "#d1d1d1",
   },
   cardContent: {
     flexDirection: "row", // Arrange image and text in a row
@@ -113,14 +113,18 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   title: {
-    color: "#fff",
+    color: "#000000",
+    fontWeight: "600",
+  },
+  description: {
+    color: "#646464",
   },
   mainTitle: {
     color: "#fff",
     fontSize: 25, // Increase Font Size
     marginTop: 7,
   },
-  description: {
+  maindescription: {
     color: "#fff",
     marginBottom: 20,
   },

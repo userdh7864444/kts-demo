@@ -78,7 +78,9 @@ const HomeScreen = () => {
 
                 <View style={styles.textContainer}>
                   <Title style={styles.title}>{item.title}</Title>
-                  <Paragraph style={styles.title}>{item.description}</Paragraph>
+                  <Paragraph style={styles.description}>
+                    {item.description}
+                  </Paragraph>
                 </View>
               </View>
             </Card>
@@ -108,7 +110,9 @@ const HomeScreen = () => {
 
                 <View style={styles.textContainer}>
                   <Title style={styles.title}>{item.title}</Title>
-                  <Paragraph style={styles.title}>{item.description}</Paragraph>
+                  <Paragraph style={styles.description}>
+                    {item.description}
+                  </Paragraph>
                 </View>
               </View>
             </Card>
@@ -156,20 +160,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 12,
     padding: 7,
-    backgroundColor: "#684bba",
+    backgroundColor: "#d1d1d1",
   },
   cardContent: {
     flexDirection: "row", // Arrange image and text in a row
     alignItems: "center",
   },
   image: {
-    width: 60,
+    width: 70,
     height: 60,
     borderRadius: 30,
     marginRight: 15,
   },
   toolImage: {
-    width: 60,
+    width: 70,
     height: 60,
     borderRadius: 30,
     marginRight: 10,
@@ -180,9 +184,12 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: "#fff",
+    color: "#000000",
+    fontWeight: "600",
   },
-
+  description: {
+    color: "#646464",
+  },
   verticleLine: {
     height: "100%",
     width: 1,

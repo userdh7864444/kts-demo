@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
   card: {
     width: "48%",
     marginBottom: 10,
-    backgroundColor: "#7b7c7e",
+    backgroundColor: "#684bba",
   },
   title: {
     color: "#fff",
@@ -336,7 +336,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   closeScanButton: {
-    backgroundColor: "#7b7c7e",
+    backgroundColor: "#684bba",
     borderRadius: 10,
     padding: 7,
     flexDirection: "row",
