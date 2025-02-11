@@ -4,7 +4,7 @@ import { ImageBackground, View, StyleSheet } from "react-native";
 const ScreenWrapper = ({ children }) => {
   return (
     <ImageBackground
-      source={require("../assets/background/login.png")}
+      source={require("../assets/background/homeBackground.png")}
       style={styles.background}
     >
       <View style={styles.overlay}>{children}</View>
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(104, 89, 107, 0.5)",
   },
 });
 

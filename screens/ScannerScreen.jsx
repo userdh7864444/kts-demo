@@ -42,11 +42,18 @@ const ScannerScreen = () => {
           style={styles.logo}
           resizeMode="contain"
         />{" "}
-        <View style={styles.buttonConatiner}>
-          <Text onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Icon name="arrow-left" size={20} color="white" />
-            {/* Left Arrow Icon */}{" "}
-          </Text>
+        <View style={styles.headerConteiner}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButtonContainer}
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
+          >
+            <View style={styles.backButton}>
+              <Icon name="chevron-left" size={40} color="white" />
+            </View>
+          </TouchableOpacity>
+
           <Title style={styles.mainTitle}>Scanner Page</Title>
         </View>
         {/* Your scanner logic here */}
@@ -117,10 +124,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   cardList: {
-    marginVertical: 8,
     borderRadius: 10,
-    elevation: 4, 
-    backgroundColor: "#ccc",
+    marginBottom: 12,
+    padding: 7,
+    backgroundColor: "#fff",
   },
   box: {
     padding: 10,
@@ -143,30 +150,44 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     backgroundColor: "red",
     borderRadius: 20,
-    width: 50, 
-    height: 30, 
-    textAlign: "center", 
-    justifyContent: "center", 
-    alignItems: "center", 
-    textAlignVertical: "center", 
+    width: 50,
+    height: 30,
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlignVertical: "center",
   },
   buttonConatiner: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
-    marginLeft:10
+    marginLeft: 10,
+  },
+  headerConteiner: {
+    display: "flex",
+    flexDirection: "row",
+    marginLeft: 16,
+  },
+  backButtonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#684bba",
+    borderRadius: 25, // Fully rounded
+    width: 40, // Slightly larger for better touch area
+    height: 40,
+    marginBottom: 10,
+    marginRight: 10, // Add some spacing between the button and the title
   },
   backButton: {
-    backgroundColor: "#684bba",
-    borderRadius: 25, 
-    width: 40,
-    paddingLeft: 7,
-    paddingTop: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: -5,
   },
   mainTitle: {
     color: "#fff",
     fontSize: 25, // Increase Font Size
     marginTop: 7,
+    fontWeight: 600,
   },
 });
 
