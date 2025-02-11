@@ -79,7 +79,7 @@ const HomeScreen = () => {
 
                   <View style={styles.textContainer}>
                     <Title style={styles.heading}>{item.title}</Title>
-                    <Paragraph style={styles.title}>
+                    <Paragraph style={styles.description}>
                       {item.description}
                     </Paragraph>
                   </View>
@@ -111,7 +111,7 @@ const HomeScreen = () => {
 
                   <View style={styles.textContainer}>
                     <Title style={styles.heading}>{item.title}</Title>
-                    <Paragraph style={styles.title}>
+                    <Paragraph style={styles.description}>
                       {item.description}
                     </Paragraph>
                   </View>
@@ -202,10 +202,9 @@ const styles = StyleSheet.create({
   },
   verticleLine: {
     height: "80%",
-    width: 3,
+    width: 2,
     borderRadius: 100,
-    backgroundColor: "#63c7d0",
+    backgroundColor: "#646464",
   },
 });
-
 export default HomeScreen;

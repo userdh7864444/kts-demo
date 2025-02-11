@@ -73,18 +73,23 @@ const ClearTools = () => {
             <View style={styles.container}>
               {selectedCard ? (
                 <>
-                  <TouchableOpacity
-                    onPress={() =>
-                      selectedCard ? setSelectedCard(null) : navigation.goBack()
-                    }
-                    style={styles.backButtonContainer}
-                    accessibilityRole="button"
-                    accessibilityLabel="Go back"
-                  >
-                    <View style={styles.backButton}>
-                      <Icon name="chevron-left" size={40} color="white" />
-                    </View>
-                  </TouchableOpacity>
+                  <View style={{ flexDirection: "row" }}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        selectedCard
+                          ? setSelectedCard(null)
+                          : navigation.goBack()
+                      }
+                      style={styles.backButtonContainer}
+                      accessibilityRole="button"
+                      accessibilityLabel="Go back"
+                    >
+                      <View style={styles.backButton}>
+                        <Icon name="chevron-left" size={40} color="white" />
+                      </View>
+                    </TouchableOpacity>
+                    <Text style={styles.mainTitle}>Clear By Shipper</Text>
+                  </View>
                   {/* <TextInput
                     style={styles.searchBar}
                     placeholderTextColor="white"
@@ -126,18 +131,24 @@ const ClearTools = () => {
                 </>
               ) : (
                 <>
-                  <TouchableOpacity
-                    onPress={() =>
-                      selectedCard ? setSelectedCard(null) : navigation.goBack()
-                    }
-                    style={styles.backButtonContainer}
-                    accessibilityRole="button"
-                    accessibilityLabel="Go back"
-                  >
-                    <View style={styles.backButton}>
-                      <Icon name="chevron-left" size={40} color="white" />
-                    </View>
-                  </TouchableOpacity>
+                  <View style={{ flexDirection: "row" }}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        selectedCard
+                          ? setSelectedCard(null)
+                          : navigation.goBack()
+                      }
+                      style={styles.backButtonContainer}
+                      accessibilityRole="button"
+                      accessibilityLabel="Go back"
+                    >
+                      <View style={styles.backButton}>
+                        <Icon name="chevron-left" size={40} color="white" />
+                      </View>
+                    </TouchableOpacity>
+                    <Text style={styles.mainTitle}>Clear By Shipper</Text>
+                  </View>
+
                   <View style={styles.row}>
                     {menuItems.map((item, index) => {
                       return (
@@ -155,7 +166,7 @@ const ClearTools = () => {
                             <View style={styles.imageIconFilter}>
                               <Image
                                 source={item.image}
-                                style={{ width: 30, height: 30 }}
+                                style={{ width: 27, height: 27 }}
                                 resizeMode="contain"
                               />
                             </View>
@@ -289,7 +300,7 @@ const styles = StyleSheet.create({
   card: {
     width: "100%",
     marginBottom: 10,
-    backgroundColor: "#5A4BAE", // More vibrant color
+    backgroundColor: "#d1d1d1",
     borderRadius: 12,
     padding: 16,
     shadowColor: "#000",
@@ -299,21 +310,21 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    color: "#fff",
+    color: "#000",
     fontSize: 16,
     fontWeight: "600",
-    marginBottom: 4,
   },
   description: {
-    color: "#fff",
-    fontSize: 24,
+    color: "#646464",
+    fontSize: 20,
     fontWeight: "bold",
   },
+
   imageIconFilter: {
-    width: 50,
-    height: 50,
+    width: 45,
+    height: 45,
     borderRadius: 25,
-    backgroundColor: "rgba(255,255,255,0.2)", // Light background for icon
+    backgroundColor: "#000", // Light background for icon
     padding: 10,
     justifyContent: "center",
     alignItems: "center",

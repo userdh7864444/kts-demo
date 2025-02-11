@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
-import { Card, Divider } from "react-native-paper";
+import { Card, Divider, Paragraph, Title } from "react-native-paper";
 import ScreenWrapper from "../componets/ScreenWrapper ";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -69,8 +69,8 @@ const PrintScreen = () => {
                 />
                 <Divider style={styles.verticleLine} />
                 <View style={styles.textContainer}>
-                  <Text style={styles.heading}>{item.title}</Text>
-                  <Text style={styles.description}>{item.description}</Text>
+                <Title style={styles.title}>{item.title}</Title>
+                <Paragraph style={styles.description}>{item.description}</Paragraph>
                 </View>
               </View>
             </Card>
@@ -151,24 +151,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#684bba",
-    borderRadius: 25,
-    width: 40,
+    borderRadius: 25, // Fully rounded
+    width: 40, // Slightly larger for better touch area
     height: 40,
     marginBottom: 10,
-    marginRight: 10,
+    marginRight: 10, // Add some spacing between the button and the title
   },
   backButton: {
-    backgroundColor: "#684bba",
-    borderRadius: 25, // Fully rounded (half of width/height)
-    width: 40,
-    paddingLeft: 7,
-    paddingTop: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: -5,
   },
   verticleLine: {
     height: "80%",
-    width: 3,
+    width: 2,
     borderRadius: 100,
-    backgroundColor: "#63c7d0",
+    backgroundColor: "#646464",
   },
 });
 

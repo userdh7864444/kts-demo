@@ -177,9 +177,10 @@ const styles = StyleSheet.create({
     marginLeft: -5,
   },
   verticleLine: {
-    height: "100%",
-    width: 1,
-    backgroundColor: "#4686bb",
+    height: "80%",
+    width: 2,
+    borderRadius: 100,
+    backgroundColor: "#646464",
   },
 });
 
