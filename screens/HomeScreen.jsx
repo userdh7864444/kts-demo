@@ -50,77 +50,82 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <ScreenWrapper>
-        <Image
-          source={require("../assets/logo/eshipperLogo.png")} // Adjust path based on file location
-          style={styles.logo}
-          resizeMode="contain"
-        />
-        <ScrollView>
-          <Text style={styles.sectionTitle}>Browser Links</Text>
-          <View style={styles.container}>
-            {menuItems.map((item, index) => (
-              <Card
-                key={index}
-                style={styles.card}
-                onPress={() => {
-                  if (item.url) {
-                    navigation.navigate("WebViewScreen", { url: item.url }); // Navigate to WebView screen
-                  }
-                }}
-              >
-                <View style={styles.cardContent}>
-                  <Image
-                    source={item.image}
-                    style={styles.image}
-                    resizeMode="contain"
-                  />
-                  <View style={styles.verticleLine}></View>
+      <Image
+        source={require("../assets/logo/eshipperLogo.png")} // Adjust path based on file location
+        style={styles.logo}
+        resizeMode="contain"
+      />
+      <ScrollView>
+        <Text style={styles.sectionTitle}>Eshipper Links</Text>
+        <View style={styles.container}>
+          <Divider style={styles.horizontalLine} />
 
-                  <View style={styles.textContainer}>
-                    <Title style={styles.heading}>{item.title}</Title>
-                    <Paragraph style={styles.description}>
-                      {item.description}
-                    </Paragraph>
-                  </View>
-                </View>
-              </Card>
-            ))}
-          </View>
-          <Text style={styles.sectionTitle}>Eshipper Tools</Text>
-          <View style={styles.container}>
-            {toolItems.map((item, index) => (
-              <Card
-                key={index}
-                style={styles.card}
-                onPress={() => {
-                  if (item.title === "One Click print") {
-                    navigation.navigate("Print");
-                  } else if (item.title === "Warehouse Scan") {
-                    navigation.navigate("Warehouse");
-                  }
-                }}
-              >
-                <View style={styles.cardContent}>
-                  <Image
-                    source={item.image}
-                    style={styles.toolImage}
-                    resizeMode="contain"
-                  />
-                  <Divider style={styles.verticleLine} />
+          {menuItems.map((item, index) => (
+            <View
+              key={index}
+              style={styles.card}
+              onPress={() => {
+                if (item.url) {
+                  navigation.navigate("WebViewScreen", { url: item.url }); // Navigate to WebView screen
+                }
+              }}
+            >
+              <View style={styles.cardContent}>
+                <Image
+                  source={item.image}
+                  style={styles.image}
+                  resizeMode="contain"
+                />
+                <View style={styles.verticleLine}></View>
 
-                  <View style={styles.textContainer}>
-                    <Title style={styles.heading}>{item.title}</Title>
-                    <Paragraph style={styles.description}>
-                      {item.description}
-                    </Paragraph>
-                  </View>
+                <View style={styles.textContainer}>
+                  <Title style={styles.heading}>{item.title}</Title>
+                  <Paragraph style={styles.description}>
+                    {item.description}
+                  </Paragraph>
                 </View>
-              </Card>
-            ))}
-          </View>
-        </ScrollView>
-      </ScreenWrapper>
+              </View>
+              <Divider style={styles.horizontalLine} />
+            </View>
+          ))}
+        </View>
+        <Text style={styles.sectionTitle}>Eshipper Tools</Text>
+        <View style={styles.container}>
+          <Divider style={styles.horizontalLine} />
+
+          {toolItems.map((item, index) => (
+            <View
+              key={index}
+              style={styles.card}
+              onPress={() => {
+                if (item.title === "One Click print") {
+                  navigation.navigate("Print");
+                } else if (item.title === "Warehouse Scan") {
+                  navigation.navigate("Warehouse");
+                }
+              }}
+            >
+              <View style={styles.cardContent}>
+                <Image
+                  source={item.image}
+                  style={styles.toolImage}
+                  resizeMode="contain"
+                />
+                <Divider style={styles.verticleLine} />
+
+                <View style={styles.textContainer}>
+                  <Title style={styles.heading}>{item.title}</Title>
+                  <Paragraph style={styles.description}>
+                    {item.description}
+                  </Paragraph>
+                </View>
+              </View>
+
+              <Divider style={styles.horizontalLine} />
+            </View>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -130,9 +135,14 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "stretch",
   },
+
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(255, 255, 255, 0)",
+  },
+  mainHeaderContanier: {
+    flexDirection: "row", // Arrange image and text in a row
+    alignItems: "center",
   },
   mainContainer: {
     flex: 1,
@@ -140,8 +150,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   sectionTitle: {
-    fontSize: 30,
-    color: "#fff",
+    fontSize: 25,
+    color: "#000",
     fontWeight: "bold",
 
     marginLeft: 20,
@@ -154,32 +164,31 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   container: {
-    padding: 16,
+    padding: 10,
     width: "100%",
     display: "flex",
     justifyContent: "center",
     alignContent: "center",
   },
   card: {
-    borderWidth: 2, // Set the border width
-    borderColor: "lightgray", // Set the border color
+    // borderWidth: 2, // Set the border width
+    // borderColor: "lightgray", // Set the border color
     borderRadius: 10,
-    marginBottom: 12,
-    padding: 7,
-    backgroundColor: "#d1d1d1",
+    marginBottom: 7,
+    // backgroundColor: "#d1d1d1",
   },
   cardContent: {
     flexDirection: "row", // Arrange image and text in a row
     alignItems: "center",
   },
   image: {
-    width: 80,
+    width: 90,
     height: 80,
     borderRadius: 30,
     marginRight: 10,
   },
   toolImage: {
-    width: 80,
+    width: 90,
     height: 80,
     borderRadius: 30,
     marginRight: 10,
@@ -204,7 +213,13 @@ const styles = StyleSheet.create({
     height: "80%",
     width: 2,
     borderRadius: 100,
-    backgroundColor: "#646464",
+    backgroundColor: "#cecece",
+  },
+  horizontalLine: {
+    width: "100%", // Ensures full width
+    height: 2, // Since it's a horizontal line, use `height` instead of `width`
+    borderRadius: 100,
+    backgroundColor: "#cecece",
   },
 });
 export default HomeScreen;
