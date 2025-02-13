@@ -35,18 +35,18 @@ export default function AppRouting() {
           </Stack.Navigator>
           <TouchableOpacity
             style={styles.logoutButton}
-            onPress={() => {
-              Alert.alert(
-                "Exit App",
-                "Are u sure you want to logout?",
-                [
-                  { text: "Cancel", style: "cancel" },
-                  { text: "Sure, Exit", onPress: () => logout() },
-                ],
-                { cancelable: false }
+            // onPress={() => {
+            //   Alert.alert(
+            //     "Exit App",
+            //     "Are u sure you want to logout?",
+            //     [
+            //       { text: "Cancel", style: "cancel" },
+            //       { text: "Sure, Exit", onPress: () => logout() },
+            //     ],
+            //     { cancelable: false }
                 
-              );
-            }}
+            //   );
+            // }}
           >
             <Ionicons name="log-out-outline" size={30} color="#fff" />
           </TouchableOpacity>
@@ -60,12 +60,12 @@ export default function AppRouting() {
   );
 }
 const styles = StyleSheet.create({
-  logoutButton: {
-    position: "absolute",
-    bottom: 20, // Placed above exit button
-    right: 20,
-    borderRadius: 50,
-    backgroundColor: "black",
-    padding: 10,
-  },
+  // logoutButton: {
+  //   position: "absolute",
+  //   bottom: 20, // Placed above exit button
+  //   right: 20,
+  //   borderRadius: 50,
+  //   backgroundColor: "black",
+  //   padding: 10,
+  // },
 });

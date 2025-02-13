@@ -1,18 +1,16 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
   View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  FlatList,
   StyleSheet,
+  Text,
   Image,
   ScrollView,
+  TextInput,
+  TouchableOpacity,
 } from "react-native";
-import { Button, Card, Paragraph, Title } from "react-native-paper";
-import ScreenWrapper from "./ScreenWrapper ";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons"; // Import icon library
+import { Card, Divider } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const data = [
   { id: "1", tracking: "1Z88YW022030402954", status: "in" },
@@ -30,236 +28,339 @@ const data = [
     status: "out",
   },
 ];
+
 const menuItems = [
   {
     title: "Total Inbound",
     url: "https://dev.eshipper.com/",
-    image: require("../assets/icon/inbound.jpg"),
+    image: require("../assets/icon/arrow-right.png"),
     value: 80,
   },
   {
     title: "Total Outbound",
     url: "https://myship.ai/",
-    image: require("../assets/icon/outbound.jpg"),
+    image: require("../assets/icon/arrow-right.png"),
     value: 50,
   },
-  // {
-  //   title: "Close Scan",
-  //   url: "https://myship.ai/",
-  //   image: require("../assets/icon/closeScan.jpg"),
-  //   value: 25,
-  // },
 ];
 const ClearTools = () => {
   const [search, setSearch] = useState("");
+
   const [selectedCard, setSelectedCard] = useState(null); // To track selected card
 
   const filteredData = data.filter((item) => item.tracking.includes(search));
   const navigation = useNavigation();
 
   return (
-    <>
-      <View style={styles.mainContainer}>
-        <ScreenWrapper>
+    <View style={styles.mainContainer}>
+      <View style={styles.headerContainer}>
+        <View style={styles.header}>
           <Image
-            source={require("../assets/logo/eshipperLogo.png")}
+            source={require("../assets/logo/eshipperLogo-white.png")}
             style={styles.logo}
             resizeMode="contain"
-          />
-
-          <ScrollView
-            style={{ flex: 1, marginTop: 10, marginBottom: 20, width: "100%" }}
+          />{" "}
+          <View style={styles.profileIcon}>
+            <Text style={styles.profileText}>U</Text>
+          </View>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButtonContainer}
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
           >
-            <View style={styles.container}>
-              {selectedCard ? (
-                <>
-                  <View style={{ flexDirection: "row" }}>
-                    <TouchableOpacity
-                      onPress={() =>
-                        selectedCard
-                          ? setSelectedCard(null)
-                          : navigation.goBack()
-                      }
-                      style={styles.backButtonContainer}
-                      accessibilityRole="button"
-                      accessibilityLabel="Go back"
-                    >
-                      <View style={styles.backButton}>
-                        <Icon name="chevron-left" size={40} color="white" />
-                      </View>
-                    </TouchableOpacity>
-                    <Text style={styles.mainTitle}>Clear By Shipper</Text>
-                  </View>
-                  {/* <TextInput
-                    style={styles.searchBar}
-                    placeholderTextColor="white"
-                    placeholder="Search tracking number..."
-                    value={search}
-                    onChangeText={setSearch}
-                  /> */}
-                  {filteredData.map((item) => (
-                    <Card key={item.id} style={styles.cardList}>
-                      <TouchableOpacity style={styles.box}>
-                        <View style={styles.listRow}>
-                          <View>
-                            <Image
-                              source={require("../assets/logo/eshipperLogo.png")}
-                              style={styles.imageIcon}
-                              resizeMode="contain"
-                            />
-                            <Text style={styles.tracking}>{item.tracking}</Text>
-                          </View>
-                          <View style={styles.statusContainer}>
-                            <Text
-                              style={[
-                                styles.status,
-                                {
-                                  color:
-                                    item.status === "in" ? "green" : "white",
-                                  backgroundColor:
-                                    item.status === "in" ? "lightgreen" : "red",
-                                },
-                              ]}
-                            >
-                              {item.status}
-                            </Text>
-                          </View>
-                        </View>
-                      </TouchableOpacity>
-                    </Card>
-                  ))}
-                </>
-              ) : (
-                <>
-                  <View style={{ flexDirection: "row" }}>
-                    <TouchableOpacity
-                      onPress={() =>
-                        selectedCard
-                          ? setSelectedCard(null)
-                          : navigation.goBack()
-                      }
-                      style={styles.backButtonContainer}
-                      accessibilityRole="button"
-                      accessibilityLabel="Go back"
-                    >
-                      <View style={styles.backButton}>
-                        <Icon name="chevron-left" size={40} color="white" />
-                      </View>
-                    </TouchableOpacity>
-                    <Text style={styles.mainTitle}>Clear By Shipper</Text>
-                  </View>
+            <View style={styles.backButton}>
+              <Image
+                source={require("../assets/icon/arrow.png")}
+                // style={styles.logo}
+                resizeMode="contain"
+              />
+            </View>
+          </TouchableOpacity>
 
-                  <View style={styles.row}>
-                    {menuItems.map((item, index) => {
-                      return (
-                        <Card
-                          key={index}
-                          style={styles.card}
-                          onPress={() => setSelectedCard(item.title)}
+          <Text style={styles.mainTitle}>Clear By Shipper</Text>
+        </View>
+        <Text style={styles.maindescription}>
+          Efficient clearing and documentation tools.
+        </Text>
+      </View>
+      <View style={styles.searchContainer}>
+        <View style={styles.searchInnerContainer}>
+          <Icon name="search" size={20} color="#888" style={styles.leftIcon} />
+          <TextInput
+            placeholder="Search..."
+            style={styles.searchBar}
+            value={search}
+            onChangeText={setSearch}
+          />
+          <Image
+            source={require("../assets/icon/zoom-scan.svg")}
+            style={styles.rightIcon}
+            resizeMode="contain"
+          />{" "}
+        </View>
+      </View>
+      <ScrollView style={{ flex: 1, width: "100%" }}>
+        <View style={styles.container}>
+          {selectedCard ? (
+            <>
+              {filteredData.map((item) => (
+                <Card key={item.id} style={styles.cardList}>
+                  <TouchableOpacity style={styles.box}>
+                    <View style={styles.listRow}>
+                      <View>
+                        <Image
+                          source={require("../assets/logo/eshipperLogo.png")}
+                          style={styles.imageIcon}
+                          resizeMode="contain"
+                        />
+                        <Text style={styles.tracking}>{item.tracking}</Text>
+                      </View>
+                      <View style={styles.statusContainer}>
+                        <Text
+                          style={[
+                            styles.status,
+                            {
+                              color:
+                                item.status === "in" ? "#00c82c" : "#e70000",
+                              backgroundColor:
+                                item.status === "in" ? "#adfaa6" : "#ffa6a6",
+                            },
+                          ]}
                         >
-                          <View
-                            style={{
-                              flexDirection: "row",
-                              alignItems: "center",
-                            }}
-                          >
-                            <View style={styles.imageIconFilter}>
-                              <Image
-                                source={item.image}
-                                style={{ width: 27, height: 27 }}
-                                resizeMode="contain"
-                              />
-                            </View>
-                            <View style={{ marginLeft: 16 }}>
-                              <Text style={styles.title}>{item.title}</Text>
-                              <Text style={styles.description}>
-                                {item.value}
-                              </Text>
-                            </View>
-                          </View>
-                        </Card>
-                      );
-                    })}
-                  </View>
-                  <TouchableOpacity
-                    style={styles.closeButtonContainer}
-                    onPress={() => {
-                      /* Add your handler */
-                    }}
-                  >
-                    <View style={styles.closeScanButton}>
-                      <Image
-                        source={require("../assets/icon/closeScan.jpg")}
-                        style={styles.buttonIcon}
-                        resizeMode="contain"
-                      />
-                      <Text style={styles.buttonText}>Close Scan</Text>
+                          {item.status}
+                        </Text>
+                      </View>
                     </View>
                   </TouchableOpacity>
-                  {filteredData.map((item) => (
-                    <Card key={item.id} style={styles.cardList}>
-                      <TouchableOpacity style={styles.box}>
-                        <View style={styles.listRow}>
-                          <View>
-                            <Image
-                              source={require("../assets/logo/eshipperLogo.png")}
-                              style={styles.imageIcon}
-                              resizeMode="contain"
-                            />
-                            <Text style={styles.tracking}>{item.tracking}</Text>
-                          </View>
-                          <View style={styles.statusContainer}>
-                            <Text
-                              style={[
-                                styles.status,
-                                {
-                                  color:
-                                    item.status === "in" ? "green" : "white",
-                                  backgroundColor:
-                                    item.status === "in" ? "lightgreen" : "red",
-                                },
-                              ]}
-                            >
-                              {item.status}
-                            </Text>
-                          </View>
+                </Card>
+              ))}
+            </>
+          ) : (
+            <>
+              <View style={styles.row}>
+                {menuItems.map((item, index) => {
+                  return (
+                    <Card
+                      key={index}
+                      style={styles.card}
+                      onPress={() => setSelectedCard(item.title)}
+                    >
+                      <View>
+                        <Text style={styles.title}>{item.title}</Text>
+                        <View style={styles.imageIconFilter}>
+                          <Text style={styles.description}>{item.value}</Text>
+                          <Image
+                            source={item.image}
+                            style={{ width: 27, height: 27 }}
+                            resizeMode="contain"
+                          />
                         </View>
-                      </TouchableOpacity>
+                      </View>
                     </Card>
-                  ))}
-                </>
-              )}
-            </View>
-          </ScrollView>
-        </ScreenWrapper>
-      </View>
-    </>
+                  );
+                })}
+              </View>
+              <TouchableOpacity
+                style={styles.closeButtonContainer}
+                onPress={() => {
+                  /* Add your handler */
+                }}
+              >
+                <View style={styles.closeScanButton}>
+                  <Image
+                    source={require("../assets/icon/closeScan.jpg")}
+                    style={styles.buttonIcon}
+                    resizeMode="contain"
+                  />
+                  <Text style={styles.buttonText}>Close Scan</Text>
+                </View>
+              </TouchableOpacity>
+              {filteredData.map((item) => (
+                <Card key={item.id} style={styles.cardList}>
+                  <TouchableOpacity style={styles.box}>
+                    <View style={styles.listRow}>
+                      <View>
+                        <Image
+                          source={require("../assets/logo/eshipperLogo.png")}
+                          style={styles.imageIcon}
+                          resizeMode="contain"
+                        />
+                        <Text style={styles.tracking}>{item.tracking}</Text>
+                      </View>
+                      <View style={styles.statusContainer}>
+                        <Text
+                          style={[
+                            styles.status,
+                            {
+                              color:
+                                item.status === "in" ? "#00c82c" : "#e70000",
+                              backgroundColor:
+                                item.status === "in" ? "#adfaa6" : "#ffa6a6",
+                            },
+                          ]}
+                        >
+                          {item.status}
+                        </Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </Card>
+              ))}
+            </>
+          )}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    width: "100%",
+    backgroundColor: "#fff",
+  },
+  headerContainer: {
+    backgroundColor: "#4a2e91",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+    marginTop: 25,
   },
   logo: {
-    width: 200,
-    height: 100,
-    marginTop: 40,
-    marginLeft: 10,
+    width: 150,
+    height: 70,
   },
   container: {
-    padding: 16,
-    paddingTop: 0,
+    padding: 15,
+  },
+  title: {
+    color: "#000",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  profileIcon: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: "#00b8c2",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  profileText: {
+    color: "#fff",
+    fontWeight: "bold",
+    marginTop: 4,
+  },
+  welcomeText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 5,
+    marginLeft: 20,
+    color: "#F0F0F0",
+  },
+  welcomeDescription: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 30,
+    marginLeft: 20,
+    color: "#b7afc7",
+  },
+  searchContainer: {
+    padding: 20,
+    marginTop: -40,
+  },
+  searchInnerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    paddingHorizontal: 10,
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+  },
+  leftIcon: {
+    marginRight: 5,
   },
   searchBar: {
-    height: 40,
-    borderWidth: 1,
-    borderColor: "#684bba",
-    borderRadius: 8,
-    paddingHorizontal: 10,
+    flex: 1,
+    marginTop: 5,
+  },
+  rightIcon: {
+    marginLeft: 5,
+  },
+  sectionTitle: {
+    fontSize: 25,
+    fontWeight: "bold",
     marginBottom: 10,
-    color: "#fff",
+  },
+  cardContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  card: {
+    width: "48%",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 15,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    marginBottom: 15,
+  },
+  cardImage: {
+    width: 100,
+    height: 50,
+    marginBottom: 10,
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  cardDescription: {
+    fontSize: 12,
+    color: "#666",
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginLeft: 20,
+  },
+  backButtonContainer: {
+    height: 40,
+    marginRight: 10, // Add some spacing between the button and the title
+  },
+  backButton: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: -5,
+  },
+  mainTitle: {
+    color: "#ffff",
+    fontSize: 25, // Increase Font Size
+    fontWeight: "600",
+  },
+  maindescription: {
+    color: "#DBDADA",
+    marginBottom: 30,
+    marginLeft: 20,
+  },
+  cardList: {
+    marginVertical: 8,
+    borderRadius: 10,
+    elevation: 4, // Adds shadow for Android
+    backgroundColor: "#fff",
   },
   box: {
     padding: 10,
@@ -282,52 +383,16 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     backgroundColor: "red",
     borderRadius: 20,
-    width: 50, // Increase width for better visibility
+    width: 30, // Increase width for better visibility
     height: 30, // Fixed height to maintain shape
     textAlign: "center", // Centers text horizontally
     justifyContent: "center", // Needed for View but not for Text
     alignItems: "center", // Needed for View but not for Text
     textAlignVertical: "center", // Centers text vertically (Android)
   },
-
-  row: {
-    // flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    width: "100%",
-    marginBottom: 30,
-  },
-  card: {
-    width: "100%",
-    marginBottom: 10,
-    backgroundColor: "#d1d1d1",
-    borderRadius: 12,
-    padding: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  title: {
-    color: "#000",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  description: {
-    color: "#646464",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-
-  imageIconFilter: {
-    width: 45,
-    height: 45,
-    borderRadius: 25,
-    backgroundColor: "#000", // Light background for icon
-    padding: 10,
-    justifyContent: "center",
-    alignItems: "center",
+  imageIcon: {
+    width: 80,
+    height: 35,
   },
   closeButtonContainer: {
     marginVertical: 5,
@@ -349,72 +414,34 @@ const styles = StyleSheet.create({
     width: "auto",
     marginTop: -20, // Auto width based on content
   },
-  buttonIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
-    // tintColor: "#fff", // White icon
-  },
   buttonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "600",
     letterSpacing: 0.5,
   },
-  cardContent: {
-    padding: 10,
+  row: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "space-between",
-    alignItems: "center",
+    width: "100%",
+    marginBottom: 30,
   },
-  imageIcon: {
-    width: 80,
-    height: 35,
-  },
-
-  cardList: {
-    marginVertical: 8,
-    borderRadius: 10,
-    elevation: 4, // Adds shadow for Android
-    backgroundColor: "#fff",
-  },
-  mainTitle: {
-    color: "#fff",
-    fontSize: 25, // Increase Font Size
-    marginTop: 7,
-  },
-  buttonConatiner: {
+  imageIconFilter: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
-    marginBottom: 20,
   },
-  closeButtonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    marginBottom: 20,
+  description: {
+    color: "#4a2e91",
+    fontSize: 20,
+    fontWeight: "bold",
+    width: "85%",
   },
-
-  // buttonIcon: {
-  //   width: 20,
-  //   height: 20,
-  //   marginRight: 5,
-  // },
-  backButtonContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#684bba",
-    borderRadius: 25, // Fully rounded
-    width: 40, // Slightly larger for better touch area
-    height: 40,
-    marginBottom: 10,
-    marginRight: 10, // Add some spacing between the button and the title
-  },
-  backButton: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: -5,
+  buttonIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+    // tintColor: "#fff", // White icon
   },
 });
 

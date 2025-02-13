@@ -4,44 +4,45 @@ import {
   StyleSheet,
   Text,
   Image,
-  Linking,
-  ImageBackground,
   ScrollView,
+  TextInput,
+  TouchableOpacity,
 } from "react-native";
-import { Card, Title, Paragraph, Divider } from "react-native-paper";
+import { Card, Divider } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import ScreenWrapper from "../componets/ScreenWrapper ";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const menuItems = [
   {
     title: "Eshipper",
     url: "https://dev.eshipper.com/",
     image: require("../assets/logo/eshipperLogo.png"),
-    description: "Comprehensive shipping solutions for businesses.",
+    description: "Comprehensive shipping solutions for business.",
   },
   {
     title: "MyShip",
     url: "https://myship.ai/",
     image: require("../assets/logo/MyShip_Teal.png"),
-    description: "AI-powered platform for seamless shipping.",
+    description: "Comprehensive shipping solutions for business.",
   },
   {
     title: "Clear By Shipper",
     url: "https://clear.eshipper.com/auth/login",
     image: require("../assets/logo/clearLogo.png"),
-    description: "Efficient clearing and documentation tools.",
+    description: "Comprehensive shipping solutions for business.",
   },
 ];
+
 const toolItems = [
   {
-    title: "One Click print",
+    title: "One Click Print",
     image: require("../assets/logo/printLogo.png"),
-    description: "Instant label printing for faster processing.",
+    description: "Comprehensive shipping solutions for business.",
   },
   {
     title: "Warehouse Scan",
     image: require("../assets/logo/warehouseLogo.png"),
-    description: "Smart scanning for streamlined warehouse management.",
+    description: "Comprehensive shipping solutions for business.",
   },
 ];
 
@@ -50,79 +51,74 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <Image
-        source={require("../assets/logo/eshipperLogo.png")} // Adjust path based on file location
-        style={styles.logo}
-        resizeMode="contain"
-      />
-      <ScrollView>
-        <Text style={styles.sectionTitle}>Eshipper Links</Text>
-        <View style={styles.container}>
-          <Divider style={styles.horizontalLine} />
+      <View style={styles.headerContainer}>
+        <View style={styles.header}>
+          <Image
+            source={require("../assets/logo/eshipperLogo-white.png")}
+            style={styles.logo}
+            resizeMode="contain"
+          />{" "}
+          <View style={styles.profileIcon}>
+            <Text style={styles.profileText}>U</Text>
+          </View>
+        </View>
+        <Text style={styles.welcomeText}>Hello, User</Text>
+        <Text style={styles.welcomeDescription}>Welcome to eShipper</Text>
+      </View>
+      <View style={styles.searchContainer}>
+        <View style={styles.searchInnerContainer}>
+          <Icon name="search" size={20} color="#888" style={styles.leftIcon} />
+          <TextInput placeholder="Search..." style={styles.searchBar} />
+          <Image
+            source={require("../assets/icon/zoom-scan.svg")}
+            style={styles.rightIcon}
+            resizeMode="contain"
+          />{" "}
+        </View>
+      </View>
 
+      <ScrollView style={styles.container}>
+        <Text style={styles.sectionTitle}>Applications</Text>
+        <View style={styles.cardContainer}>
           {menuItems.map((item, index) => (
-            <View
+            <TouchableOpacity
               key={index}
               style={styles.card}
-              onPress={() => {
-                if (item.url) {
-                  navigation.navigate("WebViewScreen", { url: item.url }); // Navigate to WebView screen
-                }
-              }}
+              onPress={() =>
+                navigation.navigate("WebViewScreen", { url: item.url })
+              }
             >
-              <View style={styles.cardContent}>
-                <Image
-                  source={item.image}
-                  style={styles.image}
-                  resizeMode="contain"
-                />
-                <View style={styles.verticleLine}></View>
-
-                <View style={styles.textContainer}>
-                  <Title style={styles.heading}>{item.title}</Title>
-                  <Paragraph style={styles.description}>
-                    {item.description}
-                  </Paragraph>
-                </View>
-              </View>
-              <Divider style={styles.horizontalLine} />
-            </View>
+              <Image
+                source={item.image}
+                style={styles.cardImage}
+                resizeMode="contain"
+              />
+              <Text style={styles.cardTitle}>{item.title}</Text>
+              <Text style={styles.cardDescription}>{item.description}</Text>
+            </TouchableOpacity>
           ))}
         </View>
-        <Text style={styles.sectionTitle}>Eshipper Tools</Text>
-        <View style={styles.container}>
-          <Divider style={styles.horizontalLine} />
 
+        <Text style={styles.sectionTitle}>Tools</Text>
+        <View style={styles.cardContainer}>
           {toolItems.map((item, index) => (
-            <View
+            <TouchableOpacity
               key={index}
               style={styles.card}
-              onPress={() => {
-                if (item.title === "One Click print") {
-                  navigation.navigate("Print");
-                } else if (item.title === "Warehouse Scan") {
-                  navigation.navigate("Warehouse");
-                }
-              }}
+              onPress={() =>
+                navigation.navigate(
+                  item.title === "One Click Print" ? "Print" : "Warehouse"
+                )
+              }
             >
-              <View style={styles.cardContent}>
-                <Image
-                  source={item.image}
-                  style={styles.toolImage}
-                  resizeMode="contain"
-                />
-                <Divider style={styles.verticleLine} />
-
-                <View style={styles.textContainer}>
-                  <Title style={styles.heading}>{item.title}</Title>
-                  <Paragraph style={styles.description}>
-                    {item.description}
-                  </Paragraph>
-                </View>
-              </View>
-
-              <Divider style={styles.horizontalLine} />
-            </View>
+              <Image
+                source={item.image}
+                style={styles.cardImage}
+                resizeMode="contain"
+              />
+              <Text style={styles.cardTitle}>{item.title}</Text>
+              <Text style={styles.cardDescription}>{item.description}</Text>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
@@ -131,95 +127,123 @@ const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    resizeMode: "stretch",
-  },
-
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(255, 255, 255, 0)",
-  },
-  mainHeaderContanier: {
-    flexDirection: "row", // Arrange image and text in a row
-    alignItems: "center",
-  },
   mainContainer: {
     flex: 1,
     backgroundColor: "#fff",
-    width: "100%",
+  },
+  headerContainer: {
+    backgroundColor: "#4a2e91",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+    marginTop: 25,
+  },
+  logo: {
+    width: 150,
+    height: 70,
+  },
+  container: {
+    padding: 15,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#fff",
+    backgroundColor: "#5A31F4",
+    padding: 10,
+    borderRadius: 5,
+  },
+  profileIcon: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: "#00b8c2",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  profileText: {
+    color: "#fff",
+    fontWeight: "bold",
+    marginTop: 4,
+  },
+  welcomeText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 5,
+    marginLeft: 20,
+    color: "#fff",
+  },
+  welcomeDescription: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 30,
+    marginLeft: 20,
+    color: "#DBDADA",
+  },
+  searchContainer: {
+    padding: 20,
+    marginTop: -40,
+  },
+  searchInnerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    paddingHorizontal: 10,
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+  },
+  leftIcon: {
+    marginRight: 5,
+  },
+  searchBar: {
+    flex: 1,
+    marginTop: 5,
+  },
+  rightIcon: {
+    marginLeft: 5,
   },
   sectionTitle: {
     fontSize: 25,
-    color: "#000",
     fontWeight: "bold",
-
-    marginLeft: 20,
+    marginBottom: 10,
   },
-  logo: {
-    width: 200, // Adjust as needed
-    height: 100, // Adjust as needed
-    marginTop: 50,
-    // marginBottom: 10,
-    marginLeft: 10,
-  },
-  container: {
-    padding: 10,
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
+  cardContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   card: {
-    // borderWidth: 2, // Set the border width
-    // borderColor: "lightgray", // Set the border color
+    width: "48%",
+    backgroundColor: "#fff",
     borderRadius: 10,
-    marginBottom: 7,
-    // backgroundColor: "#d1d1d1",
+    padding: 15,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    marginBottom: 15,
   },
-  cardContent: {
-    flexDirection: "row", // Arrange image and text in a row
-    alignItems: "center",
+  cardImage: {
+    width: 100,
+    height: 40,
+    marginBottom: 10,
   },
-  image: {
-    width: 90,
-    height: 80,
-    borderRadius: 30,
-    marginRight: 10,
-  },
-  toolImage: {
-    width: 90,
-    height: 80,
-    borderRadius: 30,
-    marginRight: 10,
-  },
-  textContainer: {
-    flex: 1, // Take remaining space
-    marginLeft: 10,
-  },
-  heading: {
+  cardTitle: {
+    fontSize: 16,
     fontWeight: "bold",
-    marginBottom: 0,
-    color: "black",
   },
-  title: {
-    color: "#000000",
-    fontWeight: "600",
-  },
-  description: {
-    color: "#646464",
-  },
-  verticleLine: {
-    height: "80%",
-    width: 2,
-    borderRadius: 100,
-    backgroundColor: "#cecece",
-  },
-  horizontalLine: {
-    width: "100%", // Ensures full width
-    height: 2, // Since it's a horizontal line, use `height` instead of `width`
-    borderRadius: 100,
-    backgroundColor: "#cecece",
+  cardDescription: {
+    fontSize: 12,
+    color: "#666",
   },
 });
+
 export default HomeScreen;
