@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingBottom: 70,
   },
   headerContainer: {
     backgroundColor: "#4a2e91",
@@ -218,6 +219,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
+    marginBottom: 15,
   },
   card: {
     width: "48%",
